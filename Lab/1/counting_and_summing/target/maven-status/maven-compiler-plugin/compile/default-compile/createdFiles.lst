@@ -1,3 +1,4 @@
 CountingAndSumming.class
 CountingAndSumming$Map.class
 CountingAndSumming$Reduce.class
+CountingAndSumming$Combine.class
