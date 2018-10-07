@@ -15,6 +15,6 @@ weight:[120 TO 500]
 alignment:good AND haircolor:"No Hair" AND gender:Female
 alignment:good AND haircolor:"No Hair" AND height:[200 TO 300]
 race:God*Eternal AND NOT alignment:bad
-height:[0 TO *] AND weight:[0 to *]
+height:[0 TO *] AND weight:[0 TO *]
 eyecolor:"-" AND race:"-" AND haircolor:"-" AND skincolor:"-"
 Batgirl~2
