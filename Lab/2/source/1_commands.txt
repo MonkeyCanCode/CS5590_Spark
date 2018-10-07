@@ -1,0 +1,235 @@
+create table heroes_information (
+    id int,
+    name string,
+    gender string,
+    eye_color string,
+    race Array<string>,
+    hair_color string,
+    height int,
+    publisher string,
+    skin_color string,
+    alignment string,
+    weight int
+)
+row format delimited fields terminated by ','
+COLLECTION ITEMS TERMINATED BY '/'
+STORED AS TEXTFILE;
+
+LOAD DATA LOCAL INPATH '/home/cloudera/Desktop/HW/Lab/2/heroes_information.csv' 
+INTO TABLE heroes_information;
+
+
+hive> select name from heroes_information where eye_color = 'yellow';
+OK
+A-Bomb
+Angel Dust
+Anti-Monitor
+Azazel
+Darth Vader
+Data
+Dormammu
+Flash IV
+Gamora
+Gorilla Grodd
+Groot
+Impulse
+Jar Jar Binks
+King Kong
+Living Brain
+Nightcrawler
+Red Hulk
+Swarm
+Trigon
+Time taken: 0.46 seconds, Fetched: 19 row(s)
+
+
+hive> select gender, count(*) count from heroes_information group by gender;
+Query ID = cloudera_20180928222020_be4e8290-10cb-416f-9a0b-00d2bce8148a
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1538197704009_0001, Tracking URL = http://quickstart.cloudera:8088/proxy/application_1538197704009_0001/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1538197704009_0001
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2018-09-28 22:21:37,561 Stage-1 map = 0%,  reduce = 0%
+2018-09-28 22:22:04,274 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.54 sec
+2018-09-28 22:22:20,053 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.19 sec
+MapReduce Total cumulative CPU time: 3 seconds 190 msec
+Ended Job = job_1538197704009_0001
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 3.19 sec   HDFS Read: 58113 HDFS Write: 25 SUCCESS
+Total MapReduce CPU Time Spent: 3 seconds 190 msec
+OK
+-   29
+Female  200
+Male    505
+Time taken: 82.169 seconds, Fetched: 3 row(s)
+
+
+hive> select name, concat(weight, "/", height) from heroes_information limit 10;
+OK
+A-Bomb  441/203
+Abe Sapien  65/191
+Abin Sur    90/185
+Abomination 441/203
+Abraxas -99/-99
+Absorbing Man   122/193
+Adam Monroe -99/-99
+Adam Strange    88/185
+Agent 13    61/173
+Agent Bob   81/178
+Time taken: 0.134 seconds, Fetched: 10 row(s)
+hive> 
+
+hive> select name, race from heroes_information where size(race) != 1;
+OK
+Abomination ["Human "," Radiation"]
+Anti-Monitor    ["God "," Eternal"]
+Atlas   ["God "," Eternal"]
+Beyonder    ["God "," Eternal"]
+Birdman ["God "," Eternal"]
+Black Flash ["God "," Eternal"]
+Boba Fett   ["Human "," Clone"]
+Captain Atom    ["Human "," Radiation"]
+Captain Planet  ["God "," Eternal"]
+Captain Universe    ["God "," Eternal"]
+Doc Samson  ["Human "," Radiation"]
+Dr Manhattan    ["Human "," Cosmic"]
+Drax the Destroyer  ["Human "," Altered"]
+Hulk    ["Human "," Radiation"]
+Human Torch ["Human "," Radiation"]
+Invisible Woman ["Human "," Radiation"]
+Man of Miracles ["God "," Eternal"]
+Master Chief    ["Human "," Altered"]
+Mister Fantastic    ["Human "," Radiation"]
+Mister Mxyzptlk ["God "," Eternal"]
+Mister Sinister ["Human "," Altered"]
+Nova    ["Human "," Cosmic"]
+Odin    ["God "," Eternal"]
+Q   ["God "," Eternal"]
+Red Hulk    ["Human "," Radiation"]
+Rhino   ["Human "," Radiation"]
+She-Thing   ["Human "," Radiation"]
+Spectre ["God "," Eternal"]
+Swamp Thing ["God "," Eternal"]
+Thing   ["Human "," Radiation"]
+Trigon  ["God "," Eternal"]
+X-23    ["Mutant "," Clone"]
+Time taken: 0.376 seconds, Fetched: 32 row(s)
+
+hive> select name from heroes_information where alignment = 'good' and hair_color = 'No Hair' and gender = 'Female';
+OK
+She-Thing
+Time taken: 0.088 seconds, Fetched: 1 row(s)
+hive> 
+
+hive> select publisher, count(*) count from heroes_information group by publisher order by count desc limit 3;
+Query ID = cloudera_20180928224444_4b592994-c7e6-41a2-829b-772730df571c
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1538197704009_0008, Tracking URL = http://quickstart.cloudera:8088/proxy/application_1538197704009_0008/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1538197704009_0008
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2018-09-28 22:44:45,308 Stage-1 map = 0%,  reduce = 0%
+2018-09-28 22:44:55,728 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.33 sec
+2018-09-28 22:45:08,845 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 2.93 sec
+MapReduce Total cumulative CPU time: 2 seconds 930 msec
+Ended Job = job_1538197704009_0008
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1538197704009_0009, Tracking URL = http://quickstart.cloudera:8088/proxy/application_1538197704009_0009/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1538197704009_0009
+Hadoop job information for Stage-2: number of mappers: 1; number of reducers: 1
+2018-09-28 22:45:25,619 Stage-2 map = 0%,  reduce = 0%
+2018-09-28 22:45:47,988 Stage-2 map = 100%,  reduce = 0%, Cumulative CPU 3.37 sec
+2018-09-28 22:46:14,609 Stage-2 map = 100%,  reduce = 100%, Cumulative CPU 5.35 sec
+MapReduce Total cumulative CPU time: 5 seconds 350 msec
+Ended Job = job_1538197704009_0009
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 2.93 sec   HDFS Read: 57275 HDFS Write: 851 SUCCESS
+Stage-Stage-2: Map: 1  Reduce: 1   Cumulative CPU: 5.35 sec   HDFS Read: 5870 HDFS Write: 48 SUCCESS
+Total MapReduce CPU Time Spent: 8 seconds 280 msec
+OK
+Marvel Comics   388
+DC Comics   215
+NBC - Heroes    19
+Time taken: 105.623 seconds, Fetched: 3 row(s)
+hive> 
+
+
+hive> select max(weight) from heroes_information;
+Query ID = cloudera_20180928223838_60481d52-8696-48e1-82fd-7dbcf097afe9
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1538197704009_0007, Tracking URL = http://quickstart.cloudera:8088/proxy/application_1538197704009_0007/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1538197704009_0007
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2018-09-28 22:38:33,041 Stage-1 map = 0%,  reduce = 0%
+2018-09-28 22:38:44,291 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.33 sec
+2018-09-28 22:39:10,453 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.46 sec
+MapReduce Total cumulative CPU time: 3 seconds 460 msec
+Ended Job = job_1538197704009_0007
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 3.46 sec   HDFS Read: 57920 HDFS Write: 4 SUCCESS
+Total MapReduce CPU Time Spent: 3 seconds 460 msec
+OK
+900
+Time taken: 50.671 seconds, Fetched: 1 row(s)
+
+hive> select name, height from heroes_information where weight = 900;
+OK
+Sasquatch   305
+Time taken: 0.121 seconds, Fetched: 1 row(s)
+hive> 
+
+hive> select name from heroes_information where name like 'Box%';
+OK
+Box
+Box III
+Box IV
+Time taken: 0.163 seconds, Fetched: 3 row(s)
+
+hive> select name, race from heroes_information where array_contains(race, "God ");
+OK
+Anti-Monitor    ["God "," Eternal"]
+Atlas   ["God "," Eternal"]
+Beyonder    ["God "," Eternal"]
+Birdman ["God "," Eternal"]
+Black Flash ["God "," Eternal"]
+Captain Planet  ["God "," Eternal"]
+Captain Universe    ["God "," Eternal"]
+Man of Miracles ["God "," Eternal"]
+Mister Mxyzptlk ["God "," Eternal"]
+Odin    ["God "," Eternal"]
+Q   ["God "," Eternal"]
+Spectre ["God "," Eternal"]
+Swamp Thing ["God "," Eternal"]
+Trigon  ["God "," Eternal"]
+Time taken: 0.126 seconds, Fetched: 14 row(s)
+hive> 

@@ -1,0 +1,28 @@
+-- Create keyspace
+CREATE KEYSPACE lab2 WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+
+-- Use keyspace
+use lab2;
+
+-- Create table
+CREATE TABLE courses_by_learner (
+    learner_id int,
+    learned_name text,
+    course_id int,
+    course_name text,
+    course_start_time timestamp,
+    course_end_time timestamp,
+    completion_status int,
+    PRIMARY KEY(learner_id, course_id)
+);
+
+-- Insert data
+INSERT INTO courses_by_learner (learner_id,learned_name,course_id,course_name,course_start_time,course_end_time,completion_status) values(1, 'John', 100, 'Python for beginner', '2018-01-01', '2018-02-01', 1);
+INSERT INTO courses_by_learner (learner_id,learned_name,course_id,course_name,course_start_time,course_end_time,completion_status) values(2, 'Jake', 100, 'Python for beginner', '2018-01-01', '2018-02-01', 0);
+INSERT INTO courses_by_learner (learner_id,learned_name,course_id,course_name,course_start_time,course_end_time,completion_status) values(3, 'Dan', 200, 'Python for scientist', '2017-01-01', '2018-01-01', 1);
+INSERT INTO courses_by_learner (learner_id,learned_name,course_id,course_name,course_start_time,course_end_time,completion_status) values(4, 'David', 201, 'Python for java developer', '1990-02-01', '1991-03-01', 0);
+
+-- Queries
+SELECT learned_name FROM courses_by_learner where course_id = 100 ALLOW FILTERING;
+SELECT learned_name, course_name FROM courses_by_learner where completion_status = 0 ALLOW FILTERING;
+SELECT learned_name, course_name, course_start_time FROM courses_by_learner where course_start_time <= '2000-01-01' ALLOW FILTERING;
