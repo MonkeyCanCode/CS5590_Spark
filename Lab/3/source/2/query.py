@@ -77,7 +77,7 @@ spark.sql("""
 """).show()
 
 
-# RDD Query 1: Get the most recent year of world cup
+# Generate RDD
 world_cups_rdd = world_cups_df.rdd
 
 # RDD 1 (*): Get the most recent year of world cup
