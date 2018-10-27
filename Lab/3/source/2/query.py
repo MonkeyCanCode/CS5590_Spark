@@ -22,7 +22,7 @@ print("Get the most recent year of world cup")
 spark.sql("select max(year) as year from world_cups").show()
 
 # Query 2: Get winner countries order by the number of winning in decreasing order
-print(" Get winner countries order by the number of winning in decreasing order")
+print("Get winner countries order by the number of winning in decreasing order")
 spark.sql("select Winner, count(*) as count from world_cups group by Winner order by 2 desc").show()
 
 # Query 3: Get all rows where the value of Winner starts with Germany
