@@ -21,8 +21,13 @@ g = GraphFrame(v, e)
 station_data_df.select(concat(col("lat"), lit(" "), col("long")).alias("loc")).show(10, False)
 
 # 3. Remove duplicates
-# 5. Output dataframe
 station_data_df.select("dockcount").distinct().show()
+
+# 4. Name columns
+station_data_df.columns
+
+# 5. Output dataframe
+station_data_df.write.parquet(input_path + "/data.parquet")
 
 # 7. Show some vertics
 g.vertices.show(10, False)
