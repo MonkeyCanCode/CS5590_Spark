@@ -1,7 +1,6 @@
 from pyspark.sql import SparkSession
 from graphframes import *
 from pyspark.sql.functions import col, concat, lit
-from pyspark.sql.functions import concat, col, lit
 
 # Create spark session
 spark = SparkSession.builder.appName("ICP 12").getOrCreate()
