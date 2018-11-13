@@ -6,7 +6,7 @@ from pyspark.sql.functions import col, concat, lit
 spark = SparkSession.builder.appName("ICP 12").getOrCreate()
 spark.sparkContext.setLogLevel("ERROR")
 
-# 1. Load tge csv data and create graph
+# 1. Load the csv data and create graph
 # 6. Create vertics
 input_path = "/home/yong/Desktop/CS5590_Spark/ICP/12/"
 trip_data_df = spark.read.format("csv").option("header", True).option("inferSchema", True).load(input_path + "/201508_trip_data.csv")
@@ -41,12 +41,12 @@ g.inDegrees.show(10, False)
 # 10. Vertex out-degree
 g.outDegrees.show(10, False)
 
-# Bonuds 1
+# Bonus 1
 g.degrees.show(10, False)
 
-# Bonuds 2
+# Bonus 2
 g.find("(a)-[e]->(b); (b)-[e2]->(a)").distinct().show(10, False)
 
-# Bonuds 3
+# Bonus 3
 g.vertices.write.parquet(input_path + "/vertices")
 g.edges.write.parquet(input_path + "/edges")
