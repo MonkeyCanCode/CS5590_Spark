@@ -40,3 +40,13 @@ g.inDegrees.show(10, False)
 
 # 10. Vertex out-degree
 g.outDegrees.show(10, False)
+
+# Bonuds 1
+g.degrees.show(10, False)
+
+# Bonuds 2
+g.find("(a)-[e]->(b); (b)-[e2]->(a)").distinct().show(10, False)
+
+# Bonuds 3
+g.vertices.write.parquet(input_path + "/vertices")
+g.edges.write.parquet(input_path + "/edges")
