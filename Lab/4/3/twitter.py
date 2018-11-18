@@ -6,10 +6,10 @@ import time
 import tweepy
 import socket
 
-CONSUMER_KEY = '1D9JkqJry8h9NihcS9iHbDbMt'
-CONSUMER_SECRET = 'HPjhBFynz7Uq0byXKQtYMSC4dxGGQLHyNN5ucN8eipgSo7DLmM'
-ACCESS_TOKEN = '534898951-DTPYyzqsg1gU8EVq1KnYy0ilo3k2hIm3zmRplWDe'
-ACCESS_TOKEN_SECRET = 'pAGY6zxXLMa8mncDIn7lZqPu32kyQUcO2bvRoRXO0d4I0'
+CONSUMER_KEY = ''
+CONSUMER_SECRET = ''
+ACCESS_TOKEN = ''
+ACCESS_TOKEN_SECRET = ''
 
 def validTweet(str_tweet):
     json_tweet = json.loads(str_tweet)
