@@ -5,7 +5,7 @@ from pyspark.ml.feature import VectorAssembler
 from pyspark.mllib.evaluation import MulticlassMetrics
 
 # Create spark session
-spark = SparkSession.builder.appName("Lab 3").getOrCreate()
+spark = SparkSession.builder.appName("Lab 4").getOrCreate()
 spark.sparkContext.setLogLevel("ERROR")
 
 # Define input path
