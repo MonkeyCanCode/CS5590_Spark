@@ -23,7 +23,7 @@ data = assembler.transform(data)
 # Split data into training and test data set
 training, test = data.select("label", "features").randomSplit([0.6, 0.4])
 
-# Create Navie Bayes model and fit the model with training dataset 
+# Create Random Forest model and fit the model with training dataset 
 rf = RandomForestClassifier()
 model = rf.fit(training)
 
