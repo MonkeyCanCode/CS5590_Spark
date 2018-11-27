@@ -32,3 +32,11 @@ results.edges.select("src", "dst", "weight").distinct().show(10, False)
 # 5. Save graph
 g.vertices.write.parquet(input_path + "vertices")
 g.edges.write.parquet(input_path + "/edges")
+
+# Bonus 1: LPA
+communities = g.labelPropagation(maxIter=5)
+communities.persist().show(10, False)
+
+# Bonus 2: BFS
+paths = g.bfs("id='MLK Library'", "lat=37.335885")
+paths.show(10, False)
